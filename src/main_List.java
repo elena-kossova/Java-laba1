@@ -18,6 +18,7 @@ public class main_List {
         System.out.println("Мой список:");
         System.out.println(meineList.toString());
 
+        meineList.delete(0);
 
         int c = -1;
         while (c != 5) {
@@ -27,7 +28,7 @@ public class main_List {
             System.out.println("3 - распечатать весь список\n");
             System.out.println("4 - узнать размерность списка\n");
             System.out.println("5 - закончить\n\n");
-            System.out.println("Выберите необходимое число\n");
+            System.out.println("Выберите необходимую команду\n");
             //c = sc.nextLine();
             while (!sc.hasNextInt()) {
                 System.out.println("Пожалуйста, введите число!\n");
@@ -49,14 +50,14 @@ public class main_List {
                     break;
                 }
                 case 2: {
-                    System.out.println("Укажите индекс, после которого стоит удаляемый элемент\n"); //с нуля
+                    System.out.println("Укажите индекс удаляемого элемента\n"); //с нуля
                     while (!sc.hasNextInt()) {
                         System.out.println("Пожалуйста, введите число!\n");
                         sc.next();
                     }
                     int position = sc.nextInt();
                     if (!meineList.delete(position)){
-                        System.out.println("Удаление невозможно!");
+                        System.out.println("Удаление невозможно! Вышли за пределы списка");
                     }
                     else {
                         System.out.println("Список после удаления");

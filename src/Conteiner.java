@@ -46,12 +46,11 @@ public class Conteiner <L> {
         ListElem p = new ListElem(newElem);
         if (isEmpty() == 1) {
             head = p;
-            tail = p;
         }
         else {
             tail.next = p;
-            tail = p;
         }
+        tail = p;
         count++;
     }
 
@@ -60,19 +59,17 @@ public class Conteiner <L> {
      * @return true if it succeeded to delete, otherwise - false
      * */
     boolean delete(int index) {
-        if (head != null){
-            if (index < 0 || index >= count) {
+        if (index < 0 || index >= count || count == 0) {
                 return false;
-            }
-            else{
-                if (index == 0){
-                    deleteFromHead();
-                }
-                else delByIndex(index);
-                return true;
-            }
         }
-        else return false;
+        if (index == 0){
+            deleteFromHead();
+            return true;
+        }
+        else {
+            delByIndex(index);
+            return true;
+        }
     }
 
     /** Deleting an item from the beginning of the list */
@@ -81,10 +78,8 @@ public class Conteiner <L> {
         if(tail == head){
             tail = null;
         }
-        if (head != null) {
-            head = head.next;
-            p = null;
-        }
+        head = head.next;
+        p = null;
         count--;
     }
     /** Deletion by index
@@ -95,6 +90,10 @@ public class Conteiner <L> {
         int i = 0;
         while(i != index-1 && i < count){
             p = p.next;
+            i++;
+        }
+        if (p == null){
+            throw new RuntimeException("Удаление невозможно! Вышли за пределы списка");
         }
         ListElem delElem = p.next;
         p.next = delElem.next;
